@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
 import { Navbar } from './components/layout/navbar/Navbar'
 import Footer from './components/layout/footer/Footer'
@@ -13,9 +13,8 @@ import MyProfile from './components/home-container/myprofile/MyProfile'
 import Notifications from './components/notifications/Notifications'
 import DonateNFT from './components/donate-nft/DonateNFT'
 import Web3Modal from 'web3modal'
-// import XmtpChat from './components/xmtp-chat/XmtpChat'
+import XmtpChat from './components/xmtp-chat/XmtpChat'
 import ABI from './artifacts/contracts/Ratemyclass.sol/Ratemyclass.json'
-
 import UAuth from '@uauth/js'
 const { ethers } = require('ethers')
 
@@ -38,7 +37,6 @@ function App() {
   const [userUD, setUserUD] = useState('')
   const [category, setCategory] = useState('')
   const [data, setData] = useState([])
-  console.log('data', data)
 
   const unstoppableInstance = new UAuth({
     clientID: '36d48583-8d6f-418d-ab02-e35123dd1467',
@@ -75,26 +73,18 @@ function App() {
   const getAllClasses = async () => {
     const temp = []
     const res = await contract.getAllGroups()
+
     for (let i = 0; i < res.length; i++) {
       let obj = {}
-      // data from smart contract
       const organizer = res[i][4]
       const reviews = res[i].reviews
       const totalDonations = res[i]['totalDonations'].toString()
       const fundraiserId = res[i].id.toString()
-
-      // fetchs data from nftStorage
       const nftStorageURL = res[i][1]
+      
       let getNFTStorageData = await fetch(nftStorageURL)
       let post = await getNFTStorageData.json()
-
-      //  fundraiser data
-      // const img = getImage(post.image)
-      // gets data from nftStorage
       const data = JSON.parse(post.description)
-      console.log('MY DATA', data)
-
-      // builds fundraiser data
       obj.fundraiserId = fundraiserId
       obj.organizer = organizer
       obj.totalDonations = totalDonations
@@ -137,9 +127,6 @@ function App() {
       signer,
     )
     setContract(contract)
-    // if (contractTemp) {
-    //   getAllClasses()
-    // }
   }
 
   const disconnectWallet = async () => {
