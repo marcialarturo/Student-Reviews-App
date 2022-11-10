@@ -75,7 +75,7 @@ https://student-reviews.netlify.app/#/
 
 https://youtu.be/B-kZtggch-0
 
-# Teamncontact info:
+# Team contact info:
 
 Izmar, metaversemoon@gmail.com
 <br/><br/>
