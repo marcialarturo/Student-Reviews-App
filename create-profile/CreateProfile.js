@@ -44,7 +44,7 @@ function CreateProfile({
     return `${mo}-${da}-${ye}`
   }
 
-  const save = async () => {
+  const postNewClass = async () => {
     try {
       const creationDate = await getDay()
       const obj = {
@@ -52,39 +52,47 @@ function CreateProfile({
           ? image
           : 'https://images.unsplash.com/photo-1531545514256-b1400bc00f31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80',
         className: className ? className : 'Introduction to Programming 100',
-        instructorName: instructorName ? instructorName : 'Prof. Boulet',
+        instructorName: instructorName
+          ? instructorName
+          : 'Prof. Thomas Wiesner',
         rating: rating ? rating : '5',
         created: creationDate,
         wouldTakeAgain: '90%',
         position: position
           ? position
-          : 'Professor at MIT, University of California',
+          : 'Formal instructor at the University of California, USA.',
         department: category ? category : 'Programming',
         classDificulty: '5',
         quality: quality ? quality : '5',
       }
 
-      console.log('what is obj', obj)
+      const client = new NFTStorage({ token: apiKey })
+      const metadata = await client.store({
+        name: position,
+        description: JSON.stringify(obj),
+        image: new File([image], 'imageName', { type: 'image/*' }),
+      })
 
-      // const client = new NFTStorage({ token: apiKey })
-      // const metadata = await client.store({
-      //   name: position,
-      //   description: JSON.stringify(obj),
-      //   image: new File([image], 'imageName', { type: 'image/*' }),
-      // })
-      // console.log('metadata', metadata)
+      if (metadata) {
+        console.log('metadata URL', metadata?.url)
+        const url = metadata?.url.substring(7)
+        const fullUrl = `https://cloudflare-ipfs.com/ipfs/${url}`
 
-      // if (metadata) {
-      //   console.log('metadata URL', metadata?.url)
-      //   const url = metadata?.url.substring(7)
-      //   const fullUrl = `https://cloudflare-ipfs.com/ipfs/${url}`
-      //   console.log('fullUrl', fullUrl)
+        setImage('')
+        setClassName('')
+        setRating('')
+        setPosition('')
+        setCategory('')
+        setQuality('')
+        setTargetAmmount('')
+        setImageName('')
+        setImageType('')
 
-      //   const saveToContract = await contract.createClass(fullUrl, '1000')
-      //   const tx = await saveToContract.wait()
-      //   console.log('tx', tx)
-      //   history.push('/classes')
-      // }
+        const saveToContract = await contract.createClass(fullUrl, '1000')
+        const tx = await saveToContract.wait()
+        console.log('tx', tx)
+        history.push('/classes')
+      }
     } catch (error) {
       console.log(error)
     }
@@ -102,9 +110,9 @@ function CreateProfile({
         maxContentLength: 'Infinity',
         headers: {
           'Content-Type': 'multipart/form-data',
-          pinata_api_key: 'd0788745e15a83111b33',
+          pinata_api_key: 'd4d71a5ab68d37b50cb7',
           pinata_secret_api_key:
-            '477c0238f46243604e6eba4b82c36fc037f30c8e96471308c1ba5a8a9702218f',
+            '24136e4c8ac255e760785a854926e079b17a0119e48a67272f4103a183f6b7ca',
         },
       },
     )
@@ -309,7 +317,11 @@ function CreateProfile({
               >
                 Never mind
               </Button>
-              <Button className="phase-btn" variant="contained" onClick={save}>
+              <Button
+                className="phase-btn"
+                variant="contained"
+                onClick={postNewClass}
+              >
                 Save
               </Button>
             </center>
