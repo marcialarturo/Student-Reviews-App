@@ -1,4 +1,3 @@
-
 # Submission
 
 ### Project Name:`Student Reviews App`
@@ -49,11 +48,12 @@ Example links:
     https://github.com/marcialarturo/Student-Reviews-App/blob/91cc4f6def6b24bfd198dcf1ac1272d1a5fdcb9c/Profile.js#L93
 
 - Professors and Classes Feature
-  - Post New Class <br/>
-    https://github.com/marcialarturo/Student-Reviews-App/blob/e9248d5b706981663414d486b1ed32d353733994/create-profile/CreateProfile.js#L47
 
-* Get All Classes <br/>
-  https://github.com/marcialarturo/Student-Reviews-App/blob/e3a7bcddec53343923b8289aa2aaf3a0ac3c85ab/App.js#L73
+  - Post New Class <br/>
+    https://github.com/marcialarturo/Student-Reviews-App/blob/493d8a545354bcd4a399e581ce6db65ced389516/CreateProfile.js#L56
+
+  - Get All Classes <br/>
+    https://github.com/marcialarturo/Student-Reviews-App/blob/493d8a545354bcd4a399e581ce6db65ced389516/ProfileList.js#L121
 
 * Reviews Feature
 
@@ -70,13 +70,15 @@ https://github.com/marcialarturo/Student-Reviews-App<br/><br/>
 
 # Live Demo
 
+### It is responsive website, for best view use a large monitor
+
 https://student-reviews.netlify.app/#/
 
 # Video Link
 
 https://youtu.be/B-kZtggch-0
 
-# Team contact info:
+# Teamncontact info:
 
 Izmar, metaversemoon@gmail.com
 <br/><br/>
@@ -114,4 +116,3 @@ This app makes use of the following software:
 
 Contract Deployed Matic: 0x2DD669b696Eb8B9D13151517ffb1acCBc88dCFC8
 Contract Deployed Skale: 0x15036E33e8E8f706fd77A1aC550d28FD58432c1B
-
